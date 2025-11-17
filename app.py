@@ -23,7 +23,9 @@ except FileNotFoundError as e:
 
 API_KEY = os.environ.get("ML_API_KEY", "supersecret")
 app = Flask(__name__)
-CORS(app)
+
+CORS(app, resources={
+     r"/predict": {"origins": "http://localhost:3000", "methods": ["POST"]}})
 
 
 def predict_risk(state: str, district: str, year: int, latitude: float, longitude: float):
